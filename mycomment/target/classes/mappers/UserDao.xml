@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mai.dao.UserDao">
+
+	<select id="findUser" resultType="User">
+		select
+		id,name,password,ch_name,group_id
+		from
+		sys_user
+		<where>
+			<if test="name != null">
+				name=#{name}
+			</if>
+			<if test="password != null">
+				and password=#{password}
+			</if>
+		</where>
+	</select>
+
+	<select id="findById" resultType="User">
+		select
+		id,name,password,ch_name,group_id
+		from
+		sys_user
+		where
+		id=#{id}
+	</select>
+
+	<insert id="insert">
+		insert into sys_user(name,password,ch_name)
+		values(#{name},#{password},#{chName})
+	</insert>
+</mapper>
